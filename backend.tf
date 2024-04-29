@@ -1,5 +1,5 @@
 terraform {
   backend "local" {
-    path = "~/.minio/terraform.tfstate"
+    path = "/root/.minio/terraform.tfstate"
   }
 }
