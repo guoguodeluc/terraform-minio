@@ -17,6 +17,18 @@ unzip terraform-provider-minio_2.2.0_linux_amd64.zip -d ~/.terraform.d/plugins/l
 ```
 
 # 操作步骤
+## 修改变量
+```bash
+# cat terraform.tfvars 
+minio_server        = "192.168.10.51:9000"
+minio_user          = "admin"
+minio_password      = "admin@xxxx"
+new_group_name      = "terraform"
+new_user_name       = "terraform"
+new_bucket_name     = "terraform1"
+new_bucket_quota    = 32212254720
+```
+## 执行terraform
 ```bash
 terraform init
 terraform plan
