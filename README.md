@@ -1,5 +1,22 @@
 
+# 版本
+terraform 版本： 1.8.0
+provider aminueza/minio版本： 2.2.0
+
 # 配置和缓存
+## 下载 terraform
+```bash
+## 安装较新版本 terraform
+## https://releases.hashicorp.com/terraform/1.8.0/terraform_1.8.0_linux_amd64.zip
+VERSION=1.8.0
+wget https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip
+unzip terraform_${VERSION}_linux_amd64.zip 
+mv terraform /usr/local/sbin/
+## 自动补全
+terraform -install-autocomplete
+## 查看版本
+terraform version
+```
 ## linux 环境变量
 ```bash
 cat > $HOME/.terraformrc <<EOF
