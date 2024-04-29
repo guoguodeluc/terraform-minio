@@ -1,6 +1,7 @@
 
 # 版本
 terraform 版本： 1.8.0
+
 provider aminueza/minio版本： 2.2.0
 
 # 配置和缓存
