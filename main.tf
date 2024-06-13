@@ -10,27 +10,28 @@ resource "minio_iam_user" "new_user" {
 }
 
 resource "minio_iam_group_user_attachment" "new_group_user" {
-  group_name = minio_iam_group.new_group.group_name
-  user_name  = minio_iam_user.new_user.id
+  group_name    = minio_iam_group.new_group.group_name
+  user_name     = minio_iam_user.new_user.id
 }
 
 resource "minio_iam_service_account" "new_service_account" {
-  target_user = minio_iam_user.new_user.name
+  target_user   = minio_iam_user.new_user.name
+  update_secret = false
 }
 
 ## 创建 bucket
 resource "minio_s3_bucket" "new_bucket" {
-  bucket = var.new_bucket_name
-  acl    = "private"
-  quota  = var.new_bucket_quota
+  bucket        = var.new_bucket_name
+  acl           = "private"
+  quota         = var.new_bucket_quota
 }
 
 
 ## 创建策略
 resource "minio_iam_group_policy" "new_group_policy" {
-  name   = var.new_group_name
-  group  = minio_iam_group.new_group.group_name
-  policy = <<EOF
+  name          = var.new_group_name
+  group         = minio_iam_group.new_group.group_name
+  policy        = <<EOF
 {
   "Version":"2012-10-17",
   "Statement": [
@@ -46,6 +47,7 @@ EOF
 
 ## 给指定组绑定策略
 resource "minio_iam_group_policy_attachment" "new_group" {
-  group_name  = minio_iam_group.new_group.group_name
-  policy_name = var.new_group_name
+  group_name    = minio_iam_group.new_group.group_name
+  policy_name   = var.new_group_name
+  depends_on    = [minio_iam_group_policy.new_group_policy]
 }
